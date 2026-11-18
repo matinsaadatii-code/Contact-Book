@@ -1,18 +1,31 @@
 [build-system]
-requires = ["setuptools>=61"]
+requires = ["setuptools>=70", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "my-solution"
+name = "contact-book"
 version = "0.1.0"
-dependencies = ["streamlit", "nltk", "python-dotenv", "pytest"]
+description = "A Contact Book application with CRUD operations on PostgreSQL."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.2",
+]
 
-[project.scripts]
-passgen = "src.main:main"   
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.6",
+]
 
-[tool.setuptools]
-packages = ["src"]
+[tool.setuptools.packages.find]
+where = ["src"]
 
 [tool.pytest.ini_options]
-pythonpath = ["."]
 testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
